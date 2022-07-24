@@ -1,0 +1,25 @@
+---
+# tasks file for install_ansible
+- name: set OS related variables
+  include_vars: '{{ os_vars }}'
+  with_first_found:
+    - '{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml'
+    - '{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
+    - '{{ ansible_distribution }}.yml'
+    - '{{ ansible_os_family }}.yml'
+    - '{{ ansible_os_family | replace ("/","_") | replace(" ","_") }}.yml'
+    - defaults.yml
+  loop_control:
+    loop_var: os_vars
+
+- name: install ansible  packages
+  include_tasks: '{{ install_ansible }}'
+  with_first_found:
+    - 'install_ansible/{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml'
+    - 'install_ansible/{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
+    - 'install_ansible/{{ ansible_distribution }}.yml'
+    - 'install_ansible/{{ ansible_os_family }}.yml'
+    - 'install_ansible/{{ ansible_os_family | replace ("/","_") | replace(" ","_") }}.yml'
+    - install_ansible/defaults.yml
+  loop_control:
+    loop_var: install_ansible

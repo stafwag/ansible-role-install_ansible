@@ -1,0 +1,9 @@
+galaxy_info:
+  role_name: install_ansible
+  author: staf wagemakers <staf@wagemakers.be>
+  description: An ansible role to install ansible
+  license: license (BSD, MIT)
+  min_ansible_version: 2.4
+  galaxy_tags:
+    - system
+dependencies: []

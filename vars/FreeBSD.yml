@@ -1,0 +1,3 @@
+---
+ansible_packages:
+  - py39-ansible
